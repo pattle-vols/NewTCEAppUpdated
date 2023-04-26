@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:NewTCEApp"
+             xmlns:viewmodel="clr-namespace:NewTCEApp.ViewModels"
+             xmlns:vm ="clr-namespace:NewTCEApp.ViewModels"
+             x:Class="NewTCEApp.Views.EventsPage"
+             Title="{Binding Title}"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:Models="clr-namespace:NewTCEApp.Models"
+             ios:Page.UseSafeArea="True">
+    <ContentPage.BindingContext>
+        <viewmodel:EventsViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*,Auto"
+          RowSpacing="0">
+
+        <CollectionView BackgroundColor="#58595B"
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Events}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="Models:Event" >
+                    <Grid Padding="10">
+                        <Frame HeightRequest="175"
+                               HasShadow="True"
+                               CornerRadius="20">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventsViewModel}}, Path=GoToDetailsCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0"
+                                  ColumnDefinitions="125,*">
+                                <Image Aspect="AspectFill"
+                                       Source="{Binding Image}"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       />
+                                <StackLayout Orientation="Vertical"
+                                             Grid.Column="1"
+                                             Padding="0"
+                                             VerticalOptions="Center"
+                                             Spacing="0"
+                                             Margin="0">
+                                    <Label Text="{Binding Title}" FontSize="18" TextColor="Black" Padding="0" CharacterSpacing="0" HorizontalOptions="Center"/>
+                                    <Label Text="{Binding Description}" FontSize="Small" CharacterSpacing="0" LineBreakMode="CharacterWrap" VerticalOptions="Center" Padding="5"/>
+                                    <Grid>
+                                        <Label Text="{Binding Location}"
+                                               Grid.Column="0"
+                                               HorizontalTextAlignment="Center"
+                                               Padding="5"/>
+                                        <Label Text="{Binding Time}"
+                                               Grid.Column="1"
+                                               HorizontalTextAlignment="Center"
+                                               Padding="5"/>
+                                        <!--
+                                        <Button Text="See More"
+                                                x:Name="NavButton"
+                                                Grid.ColumnSpan="2" 
+                                                Grid.Row="1"
+                                                CommandParameter="{Binding Url}"
+                                                Command="{Binding SendToDetailPage}"/>
+                                        -->
+                                    </Grid>
+                                </StackLayout>
+                                
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+
+        <Button Text="Load"
+                Command="{Binding GetEventsCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="2"/>
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"/>
+    </Grid>
+</ContentPage>

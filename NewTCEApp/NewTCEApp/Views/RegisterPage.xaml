@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewTCEApp.Views.RegisterPage"
+             Shell.FlyoutBehavior="Disabled"
+             >
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Padding="100">
+            <Label Text="Register now:" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large"/>
+            <Entry Placeholder="Name" x:Name="registerName" TextColor="Black" PlaceholderColor="Gray"/>
+            <Entry Placeholder="Password" IsPassword="True" x:Name="registerPassword" TextColor="Black" PlaceholderColor="Gray"/>
+            <Entry Placeholder="Re-Type Password" IsPassword="True" x:Name="confirmPassword" TextColor="Black" PlaceholderColor="Gray"/>
+            <Entry Placeholder="Email" x:Name="registerEmail" TextColor="Black" PlaceholderColor="Gray"/>
+            <Button
+                   Text="Register"
+                   VerticalOptions="Center"
+                   TextColor="#ff8200"
+                   BackgroundColor="Transparent"
+                   BorderColor="#ff8200"
+                   BorderWidth="1.5"
+                   CornerRadius="50"
+                   x:Name="ButtonClicked"
+                   Clicked="Button_Clicked"
+                   ></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

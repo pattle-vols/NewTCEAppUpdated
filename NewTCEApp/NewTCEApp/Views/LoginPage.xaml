@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewTCEApp.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             >
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Padding="100">
+            <Image Source="logo.png" WidthRequest="180" HeightRequest="180"></Image>
+
+            <Entry x:Name="emailEntry" Placeholder="Email" TextColor="Black" PlaceholderColor="Gray"></Entry>
+            <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray"></Entry>
+
+            <Button
+                VerticalOptions="Center"
+                Text="Login"
+                TextColor="#ff8200"
+                BackgroundColor="Transparent"
+                BorderColor="#ff8200"
+                BorderWidth="1.5"
+                CornerRadius="50"
+                Clicked="Button_Clicked"
+                ></Button>
+
+            <Label HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Don't have an account? " TextColor="Gray"></Span>
+                        <Span Text="Register" TextColor="#ff8200" FontAttributes="Bold"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
